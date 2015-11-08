@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SOKRITI ASSIGNMENTS ----- 2015 </title>
+
+     <link rel="stylesheet" type="text/css" href="app.css">
+</head>
+<body>
+<h1 align="center">SOKRITI ASSIGNMENT</h1>
+<div>
+    <label>Sort By</label>
+    <select id="sortBox">
+        <option>--select--</option>
+        <option value="rev_Type">REVENUE TYPE</option>
+        <option value="start_Year">START YEAR</option>
+        <option value="end_Year">END YEAR</option>
+        <option value="type">TYPE </option>
+        <option value="amount">AMOUNT </option>
+    </select>
+</div>
+<div id="categoryList"></div>
+<div class="multiple-filter">
+ Select each Type and then Click on APPLY button
+    <input type="submit" id="custom-filter" name="APPLY"/>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+<script src="http://underscorejs.org/underscore-min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+table {
+	padding: 30px 50px 0;
+	width: 100%
+}
+
+table thead {
+	background-color: #999;
+	color: #FFF;
+	text-align: left;
+}
+table thead tr th {
+	padding: 10px 0;
+}
+table tbody > tr > td {
+	padding: 10px 5px;
+	position: relative;
+}
+table tbody > tr:nth-child(2n) {
+	background-color: #F5F5F5;
+}
+table tbody > tr > td:hover > span {
+	display: block;
+}
+.multiple-filter {
+    position: absolute;
+    top: 70px;
+    /* float: right; */
+    left: 879px
+}
+.multiple-filter table {
+width : 90%;
+}
+.typeBox{
+max-width: 50%;
+}
