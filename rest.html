@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        REST EXAMPLE
+    </title>
+</head>
+    <>
+<!--first approach to ajax call -->
+    <script>
+        var ajax = {};
+            ajax.x = function() {
+                if (typeof XMLHttpRequest !== 'undefined') {
+                    return new XMLHttpRequest();
+                }
+                var versions = [
+                    "MSXML2.XmlHttp.6.0",
+                    "MSXML2.XmlHttp.5.0",
+                    "MSXML2.XmlHttp.4.0",
+                    "MSXML2.XmlHttp.3.0",
+                    "MSXML2.XmlHttp.2.0",
+                    "Microsoft.XmlHttp"
+                ];
+
+                var xhr;
+                for(var i = 0; i < versions.length; i++) {
+                    try {
+                        xhr = new ActiveXObject(versions[i]);
+                        break;
+                    } catch (e) {
+                    }
+                }
+                return xhr;
+            };
+
+ajax.send = function(url, callback, method, data, sync) {
+    var x = ajax.x();
+    x.open(method, url, sync);
+    x.onreadystatechange = function() {
+        if (x.readyState == 4) {
+            callback(x.responseText)
+        }
+    };
+    if (method == 'POST') {
+        x.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+    }
+    x.send(data)
+};
+
+ajax.get = function(url, data, callback, sync) {
+    var query = [];
+    for (var key in data) {
+        query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+    }
+    ajax.send(url + (query.length ? '?' + query.join('&') : ''), callback, 'GET', null, sync)
+};
+
+ajax.post = function(url, data, callback, sync) {
+    var query = [];
+    for (var key in data) {
+        query.push(encodeURIComponent(key) + '=' + encodeURIComponent(data[key]));
+    }
+    ajax.send(url, callback, 'POST', query.join('&'), sync)
+};
+ajax.post('https://www.google.com',{q : 'test'},function(){console.log(response)});
+    </script>
+    <!--2nd approach for ajax call -->
+    <script>
+        function ajax(url, method, data, async)
+{
+    method = typeof method !== 'undefined' ? method : 'GET';
+    async = typeof async !== 'undefined' ? async : false;
+
+    if (window.XMLHttpRequest)
+    {
+        var xhReq = new XMLHttpRequest();
+    }
+    else
+    {
+        var xhReq = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+
+
+    if (method == 'POST')
+    {
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.send(data);
+    }
+    else
+    {
+        if(typeof data !== 'undefined' && data !== null)
+        {
+            url = url+'?'+data;
+        }
+        xhReq.open(method, url, async);
+        xhReq.setRequestHeader("X-Requested-With", "XMLHttpRequest");
+        xhReq.send(null);
+    }
+    var serverResponse = xhReq.responseText;
+    alert(serverResponse);
+}
+
+ajax('https://www.google.com');
+ajax('https://www.google.com', 'POST', 'q=test');
+    </script>
+<!--method fetch applicable in newer browsers -->
+    <script>
+        var opts = {
+  method: 'GET',
+  body: 'json',
+  headers: {}
+};
+fetch('/get-data', opts).then(function (response) {
+  return response.json();
+})
+.then(function (body) {
+});
+
+    </script>
+    </body>
+</html>
